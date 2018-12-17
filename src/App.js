@@ -5,7 +5,6 @@ import { Switch, Route } from 'react-router';
 import { Link } from 'react-router-dom';
 import User from './modules/user';
 import Role from './modules/role';
-
 class App extends Component {
     render() {
         return (
@@ -33,5 +32,4 @@ class App extends Component {
         );
     }
 }
-
 export default App;
