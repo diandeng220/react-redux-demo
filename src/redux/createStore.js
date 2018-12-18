@@ -1,7 +1,8 @@
 export default function (reducers, initState = {}) {
     let state = {
-        ...initState
-    };
+            ...initState
+        },
+        listeners = [];
     function getState() {
         return state;
     }
@@ -9,10 +10,23 @@ export default function (reducers, initState = {}) {
         state = {
             ...reducers(action, state)
         }
+        dispatchListeners();
+    }
+    function dispatchListeners() {
+        listeners.forEach((listen) => {
+            listen();
+        })
+    }
+    function observable(listener) {
+        listeners.push(listener);
+        return () => {
+            listeners = listeners.filter((listen) => listen !== listener);
+        }
     }
     return {
         dispatch,
         getState,
+        observable,
         _store : state
     }
 }

@@ -3,18 +3,22 @@ import { connect } from '../../redux/react-redux';
 
 class Role extends React.Component {
     render() {
-        console.log('props', this.props);
+        console.log('RoleProps', this.props);
         return (
             <div>对的现在是Role
                 <div onClick={() => {
                     this.props.dispatch({
                         type: 'TOOGLE_MODAL',
-                        payload: true
+                        payload: !this.props.modalVisble
                     })
-                }}>dispatch</div>
+                }}><input type='button' value='dispatch'/></div>
             </div>
         )
     }
 }
 
-export default connect()(Role);
+export default connect(({modalVisble}) => {
+    return {
+        modalVisble
+    };
+})(Role);
